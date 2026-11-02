@@ -335,6 +335,14 @@ html.wt .wtbtn{color:#c9d6e6;filter:drop-shadow(0 0 8px rgba(159,182,211,.45))}
 .wtdeco .pr{display:none}
 .wtdeco.tg .ice{display:none}
 .wtdeco .fl{color:rgba(159,182,211,.22)}
+/* снег поверх всего экрана, а не только за карточками */
+html.wt body::before,html.wt body::after{content:"";position:fixed;left:0;right:0;top:-400px;bottom:0;z-index:2;pointer-events:none}
+html.wt body::before{background-image:radial-gradient(2px 2px at 20px 30px,#fff,transparent),radial-gradient(3px 3px at 150px 60px,#fff,transparent),radial-gradient(2px 2px at 90px 130px,#fff,transparent),radial-gradient(2.5px 2.5px at 200px 180px,#fff,transparent),radial-gradient(1.5px 1.5px at 40px 200px,#fff,transparent);background-size:240px 240px;opacity:.6;animation:snowo 10s linear infinite}
+html.wt body::after{background-image:radial-gradient(2.5px 2.5px at 60px 40px,#fff,transparent),radial-gradient(2px 2px at 250px 110px,#fff,transparent),radial-gradient(3px 3px at 130px 230px,#fff,transparent),radial-gradient(1.5px 1.5px at 310px 300px,#fff,transparent);background-size:360px 360px;opacity:.45;animation:snowp 17s linear infinite}
+@keyframes snowo{to{transform:translateY(240px)}}
+@keyframes snowp{to{transform:translateY(360px)}}
+html.ph body::after{display:none}
+@media (prefers-reduced-motion:reduce){html.wt body::before,html.wt body::after{animation:none}}
 /* ЗИМА RB: другая тема для Roblox — фиолетовая метель (в TG остаётся стальная с луной) */
 html.wt.rbx:root:not(.zz){--bg:#0b0a14;--surface:#14121f;--ink:#f1eeff;--muted:#9a93b8;--line:#2a2540;--accent:#b8a6ff;--accent2:#d9ceff;--n1:#a894f0}
 html.wt.rbx body{background:#0b0a14}
