@@ -1333,6 +1333,10 @@ html.st2 .setbtn2{display:grid;animation:sbin2 .45s cubic-bezier(.2,.8,.2,1)}
 @keyframes sbin2{from{opacity:0;transform:translateY(-18px) scale(.6)}}
 .langb{border:1px solid var(--line);background:none;color:var(--muted);border-radius:10px;padding:8px 14px;font-family:inherit;font-size:13px;font-weight:700;cursor:pointer}
 .langb[aria-pressed="true"]{background:var(--accent);color:var(--bg);border-color:var(--accent)}
+html.nb .setbtn::after,html.nb .setbtn2::after{content:"";position:absolute;top:1px;right:1px;width:13px;height:13px;border-radius:50%;background:#ff3b5c;border:2px solid var(--surface);animation:nbp 1.6s ease-in-out infinite}
+@keyframes nbp{50%{transform:scale(1.25)}}
+.achnew{margin-left:6px;font-style:normal;font-size:10px;font-weight:800;background:var(--accent);color:var(--bg);border-radius:6px;padding:2px 6px;letter-spacing:.08em;vertical-align:middle}
+.achrow small.achd{font-size:11px;opacity:.75}
 .sp-back{position:fixed;inset:0;z-index:80;background:rgba(0,0,0,.66);display:none;align-items:center;justify-content:center;padding:18px}
 .sp-back.on{display:flex}
 .sp{width:min(380px,100%);max-height:88vh;overflow:auto;background:var(--surface);color:var(--ink);border:1px solid var(--line);border-radius:20px;padding:20px;box-shadow:0 20px 60px rgba(0,0,0,.4);font-family:"Manrope","Segoe UI",system-ui,sans-serif}
@@ -1458,16 +1462,27 @@ try{done=JSON.parse(localStorage.getItem(K)||'{}')||{};seen=JSON.parse(localStor
 function save(){try{localStorage.setItem(K,JSON.stringify(done));localStorage.setItem(KS,JSON.stringify(seen))}catch(e){}}
 var wrap=D.createElement('div');wrap.className='achwrap';wrap.setAttribute('aria-live','polite');D.body.appendChild(wrap);
 var q=[],busy=0;
+var RARE={all:1,t50:1,bg10:1,g50:1,r50:1};
+function burst(el,big){try{var r=el.getBoundingClientRect(),xs=big?[.1,.3,.5,.7,.9]:[.5],y=r.top+r.height/2;xs.forEach(function(f,i){setTimeout(function(){D.body.dispatchEvent(new PointerEvent('pointerdown',{clientX:r.left+r.width*f,clientY:y,bubbles:true}))},i*90)})}catch(e){}}
 function next(){if(busy||!q.length)return;busy=1;var a=q.shift();
   var el=D.createElement('div');el.className='ach';
   el.innerHTML='<span class="achi">'+a[1]+'</span><span class="acht"><i>Достижение</i><b>'+a[2]+'</b><small>'+a[3]+'</small></span>';
   wrap.appendChild(el);void el.offsetWidth;el.classList.add('in');
+  setTimeout(function(){burst(el,RARE[a[0]])},380);
   setTimeout(function(){el.classList.remove('in');el.classList.add('out');setTimeout(function(){el.remove();busy=0;next()},480)},3400)}
 function find(id){for(var i=0;i<A.length;i++)if(A[i][0]===id)return A[i]}
+var KT='lq_ach_t',newIds={},lastT=0;try{lastT=+localStorage.getItem(KT)||0}catch(e){}
+function fmtD(t){try{return new Date(t).toLocaleDateString()}catch(e){return ''}}
+var KN='lq_ach_new';
+function getNew(){try{return +localStorage.getItem(KN)||0}catch(e){return 0}}
+function setNew(n){try{localStorage.setItem(KN,String(n))}catch(e){}E.classList.toggle('nb',n>0)}
+E.classList.toggle('nb',getNew()>0);
 function unlock(id){
   if(done[id])return;
   if(SEC[id]&&!done.first)unlock('first');
   done[id]=Date.now();save();
+  if(id!=='settings'&&!(back&&back.classList.contains('on')))setNew(getNew()+1);
+  else if(id!=='settings')newIds[id]=1;
   if(on){q.push(find(id));next()}
   render();
   if(SEC[id]&&done.settings&&done.roblox&&done.bin&&done.wt&&done.hw&&done.bg1)unlock('all');
@@ -1489,7 +1504,7 @@ new MutationObserver(function(){var n=st();
 var back=D.querySelector('.sp-back'),box,cnt,sw,lst;
 function render(){if(!box)return;
   var n=0;box.innerHTML=A.map(function(a){var d=done[a[0]];if(d)n++;
-    return '<div class="achrow'+(d?'':' lock')+'"><span>'+(d?a[1]:'🔒')+'</span><span><b>'+(d?a[2]:'???')+'</b><small>'+(d?a[3]:a[4])+'</small></span></div>'}).join('')
+    return '<div class="achrow'+(d?'':' lock')+'"><span>'+(d?a[1]:'🔒')+'</span><span><b>'+(d?a[2]:'???')+'</b>'+(newIds[a[0]]?'<em class="achnew">NEW</em>':'')+'<small>'+(d?a[3]:a[4])+'</small>'+(d?'<small class="achd">'+fmtD(d)+'</small>':'')+'</span></div>'}).join('')
     +'<div style="padding-top:10px"><button class="achbtn" id="achreset">Сбросить достижения</button></div>';
   cnt.textContent='Открыто '+n+' из '+A.length;
   sw.setAttribute('aria-checked',on?'true':'false')}
@@ -1504,7 +1519,7 @@ if(back){
     if(t.closest('#achsw')){on=!on;try{localStorage.setItem(KO,on?'1':'0')}catch(x){}render();return}
     if(t.closest('#achlist')){box.hidden=!box.hidden;lst.textContent=box.hidden?'Показать список':'Скрыть список';return}
     if(t.closest('#achreset')){done={};seen={};save();render()}});
-  new MutationObserver(function(){if(back.classList.contains('on')){unlock('settings');render()}}).observe(back,{attributes:true,attributeFilter:['class']});
+  new MutationObserver(function(){if(back.classList.contains('on')){unlock('settings');newIds={};for(var k in done)if(done[k]>lastT&&k!=='settings')newIds[k]=1;lastT=Date.now();try{localStorage.setItem(KT,String(lastT))}catch(e){}render();setNew(0)}}).observe(back,{attributes:true,attributeFilter:['class']});
 }
 })();
 </script>
@@ -1600,7 +1615,8 @@ function T(c){
   if(r=/^(\d+) из (\d+)$/.exec(c))return r[1]+' of '+r[2];
   return null}
 function tr(s){var m=/^(\s*)([\s\S]*?)(\s*)$/.exec(s);if(!m[2])return s;var v=T(m[2]);return v==null?s:m[1]+v+m[3]}
-var lang='ru';try{lang=localStorage.getItem(KL)==='en'?'en':'ru'}catch(e){}
+var lang='ru',sv=null;try{sv=localStorage.getItem(KL)}catch(e){}
+if(sv==='en'||sv==='ru')lang=sv;else{var nl=String((navigator.languages&&navigator.languages[0])||navigator.language||'').toLowerCase();if(nl.indexOf('en')===0)lang='en'}
 var saved=[],ATTR=['aria-label','title','alt'],busy=0,mo;
 function doText(n){if(!RX.test(n.nodeValue))return;var v=tr(n.nodeValue);if(v!==n.nodeValue){saved.push([n,n.nodeValue,null]);n.nodeValue=v}}
 function doEl(e){for(var i=0;i<ATTR.length;i++){var a=ATTR[i],o=e.getAttribute&&e.getAttribute(a);if(o&&RX.test(o)){var v=tr(o);if(v!==o){saved.push([e,o,a]);e.setAttribute(a,v)}}}}
