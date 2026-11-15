@@ -585,7 +585,6 @@ html.wt .xtree,html.xt .xtree{display:block}
 </head>
 <body>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
-<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
 <symbol id="flake" viewBox="0 0 40 40"><path d="M20 20L20.0 2.0M20.0 11.0L16.3 7.7M20.0 11.0L23.7 7.7M20.0 7.0L16.3 3.7M20.0 7.0L23.7 3.7M20 20L35.6 11.0M27.8 15.5L28.8 10.6M27.8 15.5L32.5 17.0M31.3 13.5L32.3 8.6M31.3 13.5L36.0 15.0M20 20L35.6 29.0M27.8 24.5L32.5 23.0M27.8 24.5L28.8 29.4M31.3 26.5L36.0 25.0M31.3 26.5L32.3 31.4M20 20L20.0 38.0M20.0 29.0L23.7 32.3M20.0 29.0L16.3 32.3M20.0 33.0L23.7 36.3M20.0 33.0L16.3 36.3M20 20L4.4 29.0M12.2 24.5L11.2 29.4M12.2 24.5L7.5 23.0M8.7 26.5L7.7 31.4M8.7 26.5L4.0 25.0M20 20L4.4 11.0M12.2 15.5L7.5 17.0M12.2 15.5L11.2 10.6M8.7 13.5L4.0 15.0M8.7 13.5L7.7 8.6" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" fill="none"/><circle cx="20" cy="20" r="2.2" fill="currentColor"/></symbol>
 <symbol id="icicles" viewBox="0 0 200 40" preserveAspectRatio="none"><path d="M0 0H200V4H0Z M0 0L10 12L20 0ZM20 0L30 21L40 0ZM40 0L50 30L60 0ZM60 0L70 15L80 0ZM80 0L90 24L100 0ZM100 0L110 33L120 0ZM120 0L130 18L140 0ZM140 0L150 27L160 0ZM160 0L170 12L180 0ZM180 0L190 21L200 0Z" fill="currentColor"/></symbol>
 <symbol id="pine" viewBox="0 0 50 72"><defs><linearGradient id="pgL" x1="0" x2="1"><stop offset="0" stop-color="#45bb82"/><stop offset="1" stop-color="#1f7a52"/></linearGradient><linearGradient id="pgR" x1="0" x2="1"><stop offset="0" stop-color="#1a6445"/><stop offset="1" stop-color="#0c3626"/></linearGradient><linearGradient id="ptr" x1="0" x2="1"><stop offset="0" stop-color="#9a6a3e"/><stop offset="1" stop-color="#452914"/></linearGradient><linearGradient id="psn" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff"/><stop offset="1" stop-color="#c9defa"/></linearGradient></defs><ellipse cx="25" cy="70" rx="15" ry="2.2" fill="#000" opacity=".25"/><path d="M21 56h8v13c0 1.5-2 2.2-4 2.2s-4-.7-4-2.2z" fill="url(#ptr)"/><path d="M25 30L3 59Q14 64 25 65Z" fill="url(#pgL)"/><path d="M25 30L47 59Q36 64 25 65Z" fill="url(#pgR)"/><ellipse cx="25" cy="45" rx="17" ry="3.6" fill="#041d14" opacity=".32"/><path d="M25 17L6 43Q15 47 25 48Z" fill="url(#pgL)"/><path d="M25 17L44 43Q35 47 25 48Z" fill="url(#pgR)"/><ellipse cx="25" cy="29" rx="12" ry="3" fill="#041d14" opacity=".32"/><path d="M25 4L11 27Q18 30 25 31Z" fill="url(#pgL)"/><path d="M25 4L39 27Q32 30 25 31Z" fill="url(#pgR)"/><path d="M25 4L31 13Q28 15 25 13.5Q22 15 19 13Z M25 17L33 28Q29 31 25 29Q21 31 17 28Z M25 30L36 45Q31 48 25 46Q19 48 14 45Z" fill="url(#psn)"/><path d="M25 .8l1.6 3.2 3.5.5-2.6 2.5.6 3.5-3.1-1.7-3.1 1.7.6-3.5-2.6-2.5 3.5-.5z" fill="#ffd54a"/><g fill="currentColor"><circle cx="19" cy="24" r="1.8"/><circle cx="31" cy="40" r="1.8"/><circle cx="14" cy="54" r="1.8"/><circle cx="35" cy="56" r="1.8"/><circle cx="25" cy="38" r="1.8"/><circle cx="29" cy="22" r="1.6"/></g></symbol>
@@ -833,7 +832,7 @@ function unlockRbx(){E.classList.add('ur');var c=D.getElementById('cRbx');if(c)f
 var wb=D.getElementById('wtBtn'),tc=D.querySelector('meta[name=theme-color]'),tc0=tc&&tc.content;
 function theme(n){var cur=E.classList.contains('hw')?'hw':E.classList.contains('wt')?'wt':'',nx=cur===n?'':n;
 E.classList.remove('hw','wt');if(nx)E.classList.add(nx);
-var f=D.createElement('div');f.className='hwflash'+((nx||cur)==='wt'?' ic':'');D.body.appendChild(f);f.addEventListener('animationend',gone(f));
+var f=D.createElement('div');f.className='hwflash'+((nx||cur)==='wt'?' ic':'');D.body.appendChild(f);if(window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches)f.remove();else f.addEventListener('animationend',gone(f));
 if(wb){wb.setAttribute('aria-pressed',nx==='wt');}
 if(tc)tc.content=nx==='hw'?'#140b1f':nx==='wt'?'#0a0d12':tc0}
 if(wb)wb.addEventListener('click',function(){theme('wt')});
@@ -896,6 +895,7 @@ tcs={'': '#3a3a40', 'red': '#a13636', 'coral': '#a14436', 'peach': '#a15036', 'a
 function set(){var c=list[i];if(c)E.setAttribute('data-bgc',c);else E.removeAttribute('data-bgc');
 if(meta&&!E.classList.contains('hw')&&!E.classList.contains('wt'))meta.content=tcs[c];
 }
+window._setBg=function(c){var k=list.indexOf(c);i=k<0?0:k;set()};
 set();
 var n=document.querySelector('.nick.vm');if(!n)return;
 n.setAttribute('role','button');n.setAttribute('tabindex','0');n.setAttribute('aria-label','Сменить цвет фона');
@@ -922,7 +922,7 @@ var DAB=[];TIERS.forEach(function(T,ti){for(var i=0;i<12;i++)DAB.push({ti:ti,u:.
 /* подарки */
 var GIFT=[{rho:19,phi:.5,s:4.4,hh:2.8,psi:.3,c:[216,69,59],r:'#ffe27a'},{rho:21,phi:2.6,s:3.5,hh:2.2,psi:.9,c:[59,143,216],r:'#ffffff'},{rho:17,phi:4.5,s:4,hh:3.3,psi:.1,c:[47,168,118],r:'#ff7a9a'}];
 var SPK=[[10,44,6],[-12,30,10],[18,12,-8],[-21,9,11],[6,58,-6],[-6,63,6]];
-var rot=0,vel=0,base=RM?.15:.55,drag=false,moved=false,sx=0,lx=0,lt=0,W=0,H=0,DPR=1,last=0;
+var rot=0,vel=0,base=RM?.15:.55,drag=false,moved=false,sx=0,lx=0,lt=0,W=0,H=0,DPR=1,last=0,raf=0;
 function rp(x,y,z,cr,sr){return[x*cr+z*sr,y,-x*sr+z*cr]}
 function pj(X,Y,Z){return[30+X*S,90-(Y*cp-Z*sp+16)*S,Z*cp+Y*sp]}
 function sc3(pt,cr,sr){var q=rp(pt[0],pt[1],pt[2],cr,sr),p=pj(q[0],q[1],q[2]);p[3]=q[2];return p}
@@ -1015,15 +1015,18 @@ poly(f.pts,col,'#b98300');var spc=Math.pow(sd,5);if(spc>.12){poly(f.pts,'rgba(25
 // ближние подарки
 gs.forEach(function(g){if(giftZ(g,cr,sr)>=0)gift(g,cr,sr)});
 flash*=.93;if(flash<.01)flash=0}
-function frame(now){requestAnimationFrame(frame);if(!(E.classList.contains('wt')||E.classList.contains('xt'))||document.hidden){last=0;return}
-if(!resize())return;var dt=last?Math.min(.05,(now-last)/1000):.016;last=now;
-if(!drag){vel+=(base-vel)*Math.min(1,dt*1.5);rot+=vel*dt}draw(now/1000)}
+function vis(){return E.classList.contains('wt')||E.classList.contains('xt')}
+function frame(now){raf=0;if(!vis()||document.hidden){last=0;return}
+if(!resize()){raf=requestAnimationFrame(frame);return}var dt=last?Math.min(.05,(now-last)/1000):.016;last=now;
+if(!drag){vel+=(base-vel)*Math.min(1,dt*1.5);rot+=vel*dt}draw(now/1000);raf=requestAnimationFrame(frame)}
+function sync(){if(vis()&&!document.hidden){if(!raf){last=0;raf=requestAnimationFrame(frame)}}else{if(raf){cancelAnimationFrame(raf);raf=0}last=0}}
+try{new MutationObserver(sync).observe(E,{attributes:true,attributeFilter:['class']})}catch(_){}
+document.addEventListener('visibilitychange',sync);
 t.addEventListener('pointerdown',function(e){drag=true;moved=false;sx=lx=e.clientX;lt=performance.now();try{t.setPointerCapture(e.pointerId)}catch(_){}});
 t.addEventListener('pointermove',function(e){if(!drag)return;var dx=e.clientX-lx,n=performance.now();if(Math.abs(e.clientX-sx)>4)moved=true;if(moved){rot+=dx*.04;vel=Math.max(-8,Math.min(8,dx*.04/Math.max(.008,(n-lt)/1000)))}lx=e.clientX;lt=n});
 function up(){drag=false}
 t.addEventListener('pointerup',up);t.addEventListener('pointercancel',up);
 t.addEventListener('click',function(){if(moved){moved=false;return}pi=(pi+1)%P.length;flash=1;t.classList.remove('xp');void t.offsetWidth;t.classList.add('xp')});
-requestAnimationFrame(frame);
 })();
 </script>
 <style>
@@ -1081,18 +1084,11 @@ addEventListener('pointerdown',function(e){
 },{passive:true});
 })();
 </script>
-<style>*:focus,*:focus-visible{outline:none!important}</style>
-<script>
-(function(){
-var D=document;
-function off(){D.querySelectorAll('a,button,input,select,textarea,[tabindex]').forEach(function(el){el.setAttribute('tabindex','-1')})}
-off();addEventListener('load',off);
-D.addEventListener('keydown',function(e){if(e.key==='Tab')e.preventDefault()},true);
-})();
-</script>
+<style>:focus-visible{outline:2px solid var(--accent);outline-offset:3px}</style>
 <script>
 (function(){
 var E=document.documentElement,c=document.getElementById('cVid');if(!c)return;
+c.tabIndex=0;
 function set(on){E.classList.toggle('vid',on);c.setAttribute('aria-pressed',on?'true':'false')}
 c.addEventListener('click',function(){set(!E.classList.contains('vid'))});
 c.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();c.click()}});
@@ -1109,7 +1105,7 @@ document.querySelectorAll('.vcard').forEach(function(v){
     var p=v.querySelector('.vpost'),f=document.createElement('iframe');
     f.src='https://drive.google.com/file/d/'+m[1]+'/preview';
     f.title='\u0422\u0440\u0435\u043d\u0434\u044b';f.allow='autoplay; fullscreen';f.setAttribute('allowfullscreen','');f.referrerPolicy='no-referrer';
-    p.textContent='';p.appendChild(f);
+    p.textContent='';p.removeAttribute('aria-hidden');p.appendChild(f);
     v.classList.add('playing');
     var s=v.querySelector('small');if(s)s.textContent='\u041e\u0442\u043a\u0440\u044b\u0442\u044c \u0432 Google Drive \u2197';
   });
@@ -1341,6 +1337,7 @@ html.nb .setbtn::after,html.nb .setbtn2::after{content:"";position:absolute;top:
 .setbtn:hover,.setbtn2:hover,.setbtn:active,.setbtn2:active,html.nb .setbtn,html.nb .setbtn2{opacity:1}
 .sp-back{position:fixed;inset:0;z-index:80;background:rgba(0,0,0,.66);display:none;align-items:center;justify-content:center;padding:18px}
 .sp-back.on{display:flex}
+html.spopen,html.spopen body{overflow:hidden}
 .sp{width:min(380px,100%);max-height:88vh;overflow:auto;background:var(--surface);color:var(--ink);border:1px solid var(--line);border-radius:20px;padding:20px;box-shadow:0 20px 60px rgba(0,0,0,.4);font-family:"Manrope","Segoe UI",system-ui,sans-serif}
 .sp h2{font-size:18px;margin:0 0 10px;display:flex;justify-content:space-between;align-items:center}
 .sp-x{border:0;background:none;color:var(--muted);font-size:26px;cursor:pointer;line-height:1;padding:0 4px}
@@ -1360,6 +1357,12 @@ html.nb .setbtn::after,html.nb .setbtn2::after{content:"";position:absolute;top:
 .cdot,.ndot{width:36px;height:36px;border-radius:50%;border:2px solid var(--line);cursor:pointer;padding:0}
 .cdot[aria-pressed="true"],.ndot[aria-pressed="true"]{border-color:var(--ink);box-shadow:0 0 0 2px var(--surface),0 0 0 4px var(--ink)}
 .sp-rs{border:1px solid var(--line);background:none;color:var(--ink);border-radius:10px;padding:8px 14px;font:inherit;font-size:13px;font-weight:700;cursor:pointer}
+@media (prefers-reduced-motion:reduce){
+.rain,.rain2,.meteor{display:none!important}
+.hwflash{display:none}
+.ring,.ring::before,.nick,.hwbg::after,.wtbg .snow,.wtbg::before,.spark{animation:none!important}
+.hwdeco *,.wtdeco *{animation:none!important}
+}
 </style>
 <script>
 (function(){
@@ -1369,7 +1372,7 @@ function save(){try{localStorage.setItem(K,JSON.stringify(S))}catch(e){}}
 var CP=[['','Авто','conic-gradient(#f0f0f2 0 50%,#1c1c20 0)'],['ice','Ледяной','linear-gradient(135deg,#07142b 50%,#72c8ff 50%)'],['graphite','Графит','linear-gradient(135deg,#0a0d12 50%,#9fb6d3 50%)'],['violet','Фиолет','linear-gradient(135deg,#0b0a14 50%,#b8a6ff 50%)'],['orange','Тыква','linear-gradient(135deg,#140b1f 50%,#ff7a1a 50%)'],['rose','Роза','linear-gradient(135deg,#1a0b14 50%,#ff5fa8 50%)'],['ocean','Океан','linear-gradient(135deg,#04161c 50%,#22c7d8 50%)'],['gold','Золото','linear-gradient(135deg,#14100a 50%,#f0b429 50%)'],['crimson','Кровь','linear-gradient(135deg,#12060a 50%,#e0243c 50%)'],['sunset','Закат','linear-gradient(135deg,#1a0d14 50%,#ff7a45 50%)'],['emerald','Изумруд','linear-gradient(135deg,#06150f 50%,#2fd48a 50%)'],['neon','Неон','linear-gradient(135deg,#050806 50%,#39ff6a 50%)'],['plum','Пурпур','linear-gradient(135deg,#120618 50%,#c04dff 50%)'],['mocha','Мокко','linear-gradient(135deg,#140e0a 50%,#c08a5a 50%)'],['turq','Бирюза','linear-gradient(135deg,#041513 50%,#1fd1bd 50%)'],['midnight','Полночь','linear-gradient(135deg,#090b1e 50%,#6f7bff 50%)'],['moss','Мох','linear-gradient(135deg,#0e1208 50%,#a3c93a 50%)'],['black','Чёрный','linear-gradient(135deg,#000000 50%,#ffffff 50%)'],['wine','Вино','linear-gradient(135deg,#0f0508 50%,#b0173f 50%)'],['space','Космос','linear-gradient(135deg,#05030f 50%,#7c4dff 50%)'],['cyber','Кибер','linear-gradient(135deg,#07040d 50%,#ff2bd6 50%)'],['lava','Лава','linear-gradient(135deg,#0d0402 50%,#ff4d12 50%)'],['acid','Кислота','linear-gradient(135deg,#0a0d02 50%,#d4ff1a 50%)'],['sapphire','Сапфир','linear-gradient(135deg,#020a1a 50%,#2f7bff 50%)'],['rust','Ржавчина','linear-gradient(135deg,#110804 50%,#d2691e 50%)'],['pine','Хвоя','linear-gradient(135deg,#07120c 50%,#3d9a63 50%)'],['uv','Ультрафиолет','linear-gradient(135deg,#0a0414 50%,#9d00ff 50%)'],['amethyst','Аметист','linear-gradient(135deg,#0e0716 50%,#a76bdc 50%)'],['arctic','Арктика','linear-gradient(135deg,#040c12 50%,#4cc3ff 50%)'],['coal','Уголь','linear-gradient(135deg,#101010 50%,#c0c0c0 50%)'],['amber','Янтарь','linear-gradient(135deg,#100a02 50%,#ffb000 50%)'],['berry','Малина','linear-gradient(135deg,#12040c 50%,#ff1f8e 50%)'],['abyss','Бездна','linear-gradient(135deg,#020812 50%,#00b4ff 50%)'],['smoke','Дым','linear-gradient(135deg,#0c0d10 50%,#7d8aa8 50%)'],['copper','Медь','linear-gradient(135deg,#120a07 50%,#e07a3f 50%)'],['steelb','Сталь','linear-gradient(135deg,#080c12 50%,#5b8fd6 50%)'],['blossom','Цветение','linear-gradient(135deg,#140a14 50%,#e56fe0 50%)'],['cobalt','Кобальт','linear-gradient(135deg,#030a1c 50%,#2b5fff 50%)'],['jungle','Джунгли','linear-gradient(135deg,#05100a 50%,#28c060 50%)'],['ruby','Рубин','linear-gradient(135deg,#14050a 50%,#f0245a 50%)'],['ash','Пепел','linear-gradient(135deg,#0d0d12 50%,#9d99d6 50%)'],['storm','Гроза','linear-gradient(135deg,#0a0f14 50%,#4aa3df 50%)'],['dusk','Сумерки','linear-gradient(135deg,#12072a,#3a1458,#7a2a4a)'],['aurora','Аврора','linear-gradient(135deg,#04141a,#0b3a3a,#2a1a5e)'],['ember','Угли','linear-gradient(135deg,#120403,#3a0f08,#6b2a06)'],['deep','Глубина','linear-gradient(135deg,#020b1a,#06305a,#0a6a7a)'],['candy','Леденец','linear-gradient(135deg,#1a0630,#4a0f5c,#0f3a6a)'],['sunrise','Рассвет','linear-gradient(135deg,#1b1030,#5a2a5e,#a8483e)'],['forest','Лес','linear-gradient(135deg,#06140c,#0e3a22,#3a4a0e)'],['galaxy','Галактика','linear-gradient(135deg,#05030f,#1a0b45,#0b3a6a)'],['bloodmoon','Кровавая луна','linear-gradient(135deg,#120305,#4a0a18,#1a0a3a)'],['icemint','Ледяная мята','linear-gradient(135deg,#04161a,#0b3a45,#1a4a6a)'],['goldnight','Золотая ночь','linear-gradient(135deg,#0e0a1a,#2a1f3a,#5a4208)'],['tropic','Тропики','linear-gradient(135deg,#04181a,#0a4a3a,#5a1a4a)'],['h-red','Красный','linear-gradient(135deg,hsl(0,40%,9%) 50%,hsl(0,90%,62%) 50%)'],['h-coral','Коралловый','linear-gradient(135deg,hsl(8,40%,9%) 50%,hsl(8,90%,62%) 50%)'],['h-peach','Персиковый','linear-gradient(135deg,hsl(15,40%,9%) 50%,hsl(15,90%,62%) 50%)'],['h-apricot','Абрикосовый','linear-gradient(135deg,hsl(22,40%,9%) 50%,hsl(22,90%,62%) 50%)'],['h-orange','Оранжевый','linear-gradient(135deg,hsl(28,40%,9%) 50%,hsl(28,90%,62%) 50%)'],['h-tangerine','Мандарин','linear-gradient(135deg,hsl(33,40%,9%) 50%,hsl(33,90%,62%) 50%)'],['h-amber','Янтарный','linear-gradient(135deg,hsl(38,40%,9%) 50%,hsl(38,90%,62%) 50%)'],['h-gold','Золотой','linear-gradient(135deg,hsl(43,40%,9%) 50%,hsl(43,90%,62%) 50%)'],['h-yellow','Жёлтый','linear-gradient(135deg,hsl(48,40%,9%) 50%,hsl(48,90%,62%) 50%)'],['h-lemon','Лимонный','linear-gradient(135deg,hsl(56,40%,9%) 50%,hsl(56,90%,62%) 50%)'],['h-olive','Оливковый','linear-gradient(135deg,hsl(65,40%,9%) 50%,hsl(65,90%,62%) 50%)'],['h-chartreuse','Шартрез','linear-gradient(135deg,hsl(74,40%,9%) 50%,hsl(74,90%,62%) 50%)'],['h-lime','Лайм','linear-gradient(135deg,hsl(85,40%,9%) 50%,hsl(85,90%,62%) 50%)'],['h-spring','Весенний','linear-gradient(135deg,hsl(100,40%,9%) 50%,hsl(100,90%,62%) 50%)'],['h-fern','Папоротник','linear-gradient(135deg,hsl(120,40%,9%) 50%,hsl(120,90%,62%) 50%)'],['h-green','Зелёный','linear-gradient(135deg,hsl(140,40%,9%) 50%,hsl(140,90%,62%) 50%)'],['h-jade','Нефрит','linear-gradient(135deg,hsl(150,40%,9%) 50%,hsl(150,90%,62%) 50%)'],['h-mint','Мятный','linear-gradient(135deg,hsl(158,40%,9%) 50%,hsl(158,90%,62%) 50%)'],['h-seafoam','Морская пена','linear-gradient(135deg,hsl(165,40%,9%) 50%,hsl(165,90%,62%) 50%)'],['h-teal','Бирюзовый','linear-gradient(135deg,hsl(172,40%,9%) 50%,hsl(172,90%,62%) 50%)'],['h-aqua','Аква','linear-gradient(135deg,hsl(182,40%,9%) 50%,hsl(182,90%,62%) 50%)'],['h-cyan','Голубой','linear-gradient(135deg,hsl(192,40%,9%) 50%,hsl(192,90%,62%) 50%)'],['h-cerulean','Церулеан','linear-gradient(135deg,hsl(200,40%,9%) 50%,hsl(200,90%,62%) 50%)'],['h-sky','Небесный','linear-gradient(135deg,hsl(205,40%,9%) 50%,hsl(205,90%,62%) 50%)'],['h-cornflower','Василёк','linear-gradient(135deg,hsl(212,40%,9%) 50%,hsl(212,90%,62%) 50%)'],['h-blue','Синий','linear-gradient(135deg,hsl(218,40%,9%) 50%,hsl(218,90%,62%) 50%)'],['h-royal','Королевский','linear-gradient(135deg,hsl(225,40%,9%) 50%,hsl(225,90%,62%) 50%)'],['h-azure','Лазурный','linear-gradient(135deg,hsl(230,40%,9%) 50%,hsl(230,90%,62%) 50%)'],['h-periwinkle','Барвинок','linear-gradient(135deg,hsl(238,40%,9%) 50%,hsl(238,90%,62%) 50%)'],['h-indigo','Индиго','linear-gradient(135deg,hsl(245,40%,9%) 50%,hsl(245,90%,62%) 50%)'],['h-iris','Ирис','linear-gradient(135deg,hsl(252,40%,9%) 50%,hsl(252,90%,62%) 50%)'],['h-violet','Фиалковый','linear-gradient(135deg,hsl(260,40%,9%) 50%,hsl(260,90%,62%) 50%)'],['h-grape','Виноград','linear-gradient(135deg,hsl(268,40%,9%) 50%,hsl(268,90%,62%) 50%)'],['h-purple','Фиолетовый','linear-gradient(135deg,hsl(275,40%,9%) 50%,hsl(275,90%,62%) 50%)'],['h-orchid','Орхидея','linear-gradient(135deg,hsl(290,40%,9%) 50%,hsl(290,90%,62%) 50%)'],['h-magenta','Маджента','linear-gradient(135deg,hsl(305,40%,9%) 50%,hsl(305,90%,62%) 50%)'],['h-fuchsia','Фуксия','linear-gradient(135deg,hsl(318,40%,9%) 50%,hsl(318,90%,62%) 50%)'],['h-pink','Розовый','linear-gradient(135deg,hsl(330,40%,9%) 50%,hsl(330,90%,62%) 50%)'],['h-raspberry','Малина','linear-gradient(135deg,hsl(340,40%,9%) 50%,hsl(340,90%,62%) 50%)'],['h-rose','Роза','linear-gradient(135deg,hsl(350,40%,9%) 50%,hsl(350,90%,62%) 50%)'],['h-cherry','Вишня','linear-gradient(135deg,hsl(357,40%,9%) 50%,hsl(357,90%,62%) 50%)'],['m-0','Красный + Синий','linear-gradient(135deg,hsl(0,85%,52%),hsl(218,85%,52%))'],['m-1','Оранжевый + Фиолетовый','linear-gradient(135deg,hsl(28,85%,52%),hsl(275,85%,52%))'],['m-2','Жёлтый + Розовый','linear-gradient(135deg,hsl(48,85%,52%),hsl(330,85%,52%))'],['m-3','Лайм + Голубой','linear-gradient(135deg,hsl(85,85%,52%),hsl(192,85%,52%))'],['m-4','Зелёный + Фиалковый','linear-gradient(135deg,hsl(140,85%,52%),hsl(260,85%,52%))'],['m-5','Бирюзовый + Розовый','linear-gradient(135deg,hsl(172,85%,52%),hsl(330,85%,52%))'],['m-6','Голубой + Оранжевый','linear-gradient(135deg,hsl(192,85%,52%),hsl(28,85%,52%))'],['m-7','Синий + Жёлтый','linear-gradient(135deg,hsl(218,85%,52%),hsl(48,85%,52%))'],['m-8','Индиго + Персиковый','linear-gradient(135deg,hsl(245,85%,52%),hsl(15,85%,52%))'],['m-9','Фиолетовый + Бирюзовый','linear-gradient(135deg,hsl(275,85%,52%),hsl(172,85%,52%))'],['m-10','Маджента + Лайм','linear-gradient(135deg,hsl(305,85%,52%),hsl(85,85%,52%))'],['m-11','Розовый + Церулеан','linear-gradient(135deg,hsl(330,85%,52%),hsl(200,85%,52%))'],['m-12','Роза + Зелёный','linear-gradient(135deg,hsl(350,85%,52%),hsl(140,85%,52%))'],['m-13','Персиковый + Фиалковый','linear-gradient(135deg,hsl(15,85%,52%),hsl(260,85%,52%))'],['m-14','Янтарный + Маджента','linear-gradient(135deg,hsl(38,85%,52%),hsl(305,85%,52%))'],['m-15','Мятный + Роза','linear-gradient(135deg,hsl(158,85%,52%),hsl(350,85%,52%))'],['m-16','Небесный + Оранжевый','linear-gradient(135deg,hsl(205,85%,52%),hsl(28,85%,52%))'],['m-17','Лазурный + Оливковый','linear-gradient(135deg,hsl(230,85%,52%),hsl(65,85%,52%))'],['m-18','Фиалковый + Янтарный','linear-gradient(135deg,hsl(260,85%,52%),hsl(38,85%,52%))'],['m-19','Аква + Персиковый','linear-gradient(135deg,hsl(182,85%,52%),hsl(15,85%,52%))'],['m-20','Папоротник + Маджента','linear-gradient(135deg,hsl(120,85%,52%),hsl(305,85%,52%))'],['m-21','Коралловый + Голубой','linear-gradient(135deg,hsl(8,85%,52%),hsl(192,85%,52%))'],['m-22','Весенний + Фиолетовый','linear-gradient(135deg,hsl(100,85%,52%),hsl(275,85%,52%))'],['m-23','Барвинок + Оранжевый','linear-gradient(135deg,hsl(240,85%,52%),hsl(30,85%,52%))']];
 var NC=[['','Серый','conic-gradient(#f0f0f2 0 50%,#6b6b73 0)'],['red','Красный','hsl(0,70%,62%)'],['coral','Коралловый','hsl(8,70%,62%)'],['peach','Персиковый','hsl(15,70%,62%)'],['apricot','Абрикосовый','hsl(22,70%,62%)'],['orange','Оранжевый','hsl(28,70%,62%)'],['tangerine','Мандарин','hsl(33,70%,62%)'],['amber','Янтарный','hsl(38,70%,62%)'],['gold','Золотой','hsl(43,70%,62%)'],['yellow','Жёлтый','hsl(48,70%,62%)'],['lemon','Лимонный','hsl(56,70%,62%)'],['olive','Оливковый','hsl(65,70%,62%)'],['chartreuse','Шартрез','hsl(74,70%,62%)'],['lime','Лайм','hsl(85,70%,62%)'],['spring','Весенний','hsl(100,70%,62%)'],['fern','Папоротник','hsl(120,70%,62%)'],['green','Зелёный','hsl(140,70%,62%)'],['jade','Нефрит','hsl(150,70%,62%)'],['mint','Мятный','hsl(158,70%,62%)'],['seafoam','Морская пена','hsl(165,70%,62%)'],['teal','Бирюзовый','hsl(172,70%,62%)'],['aqua','Аква','hsl(182,70%,62%)'],['cyan','Голубой','hsl(192,70%,62%)'],['cerulean','Церулеан','hsl(200,70%,62%)'],['sky','Небесный','hsl(205,70%,62%)'],['cornflower','Василёк','hsl(212,70%,62%)'],['blue','Синий','hsl(218,70%,62%)'],['royal','Королевский','hsl(225,70%,62%)'],['azure','Лазурный','hsl(230,70%,62%)'],['periwinkle','Барвинок','hsl(238,70%,62%)'],['indigo','Индиго','hsl(245,70%,62%)'],['iris','Ирис','hsl(252,70%,62%)'],['violet','Фиалковый','hsl(260,70%,62%)'],['grape','Виноград','hsl(268,70%,62%)'],['purple','Фиолетовый','hsl(275,70%,62%)'],['orchid','Орхидея','hsl(290,70%,62%)'],['magenta','Маджента','hsl(305,70%,62%)'],['fuchsia','Фуксия','hsl(318,70%,62%)'],['pink','Розовый','hsl(330,70%,62%)'],['raspberry','Малина','hsl(340,70%,62%)'],['rose','Роза','hsl(350,70%,62%)'],['cherry','Вишня','hsl(357,70%,62%)']];
 var ndots=NC.map(function(c){return '<button class="ndot" data-b="'+c[0]+'" title="'+c[1]+'" aria-label="'+c[1]+'" style="background:'+c[2]+'"></button>'}).join('');
-function setBg(c){var n=D.querySelector('.nick.vm');if(!n)return;for(var k=0;k<60&&(E.getAttribute('data-bgc')||'')!==c;k++)n.click()}
+function setBg(c){if(window._setBg){window._setBg(c);return}var n=D.querySelector('.nick.vm');if(!n)return;for(var k=0;k<60&&(E.getAttribute('data-bgc')||'')!==c;k++)n.click()}
 function setT(k,on){if(E.classList.contains(k)===on)return;var el=k==='wt'?D.getElementById('wtBtn'):D.querySelector('.hwnick');if(el)el.click()}
 var _ls;
 var back=D.createElement('div');back.className='sp-back';
@@ -1394,6 +1397,11 @@ back.innerHTML='<div class="sp" role="dialog" aria-modal="true" aria-label="На
 +'<div class="sp-row" style="display:block"><span>Цвет фона <button class="sp-i" data-i="bg" aria-label="Как получить">!</button><small>Как при нажатии на ник lqwrt</small></span><div class="sp-cols">'+ndots+'</div></div>'
 +'<div class="sp-hint" data-h="bg" hidden>Секретка: нажимай на ник lqwrt вверху - фон будет меняться по кругу.</div>'
 +'<div class="sp-row"><span>Сбросить всё</span><button class="sp-rs">Сброс</button></div></div>';
+back.querySelectorAll('.sw').forEach(function(x){
+  var s=x.parentElement.querySelector('span'),n=s&&s.firstChild?s.firstChild.nodeValue.trim():'';
+  if(n)x.setAttribute('aria-label',n);
+});
+back.querySelectorAll('.sp-i').forEach(function(x){x.setAttribute('aria-expanded','false')});
 D.body.appendChild(back);
 function apply(){
   E.classList.toggle('norain',!S.rain);E.classList.toggle('mix',!!S.mix);if(S.spd!==_ls){_ls=S.spd;if(window._setSpd)window._setSpd({s:.55,n:1,f:1.7}[S.spd]||1)}back.querySelectorAll('.spd').forEach(function(x){x.setAttribute('aria-pressed',x.dataset.s===S.spd?'true':'false')});E.classList.toggle('sb',!!S.btn3);E.classList.toggle('st2',!!S.top2);if(S.rb)E.classList.add('ur');if(S.mix&&window._buildR2)window._buildR2();E.classList.toggle('xt',!!S.tree);
@@ -1409,15 +1417,17 @@ apply();
 if(S.hw)setT('hw',true);else if(S.wt)setT('wt',true);
 if(S.bgc)setBg(S.bgc);
 if(S.bin&&window._bin)window._bin(true);
-function open(){apply();back.classList.add('on')}
+var lastFocus=null;
+function open(){apply();lastFocus=D.activeElement;back.classList.add('on');E.classList.add('spopen');var x=back.querySelector('.sp-x');if(x){try{x.focus({preventScroll:true})}catch(_){x.focus()}}}
 var sbn=D.createElement('button');sbn.className='setbtn';sbn.type='button';sbn.setAttribute('aria-label','Настройки');sbn.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg>';
 sbn.addEventListener('click',open);D.body.appendChild(sbn);
 var sb2=D.createElement('button');sb2.className='setbtn2';sb2.type='button';sb2.setAttribute('aria-label','Настройки');sb2.innerHTML=sbn.innerHTML;sb2.addEventListener('click',open);D.body.appendChild(sb2);
-function close(){back.classList.remove('on')}
+function close(){back.classList.remove('on');E.classList.remove('spopen');if(lastFocus&&lastFocus.focus){try{lastFocus.focus({preventScroll:true})}catch(_){}}}
 back.addEventListener('click',function(e){
   var t=e.target;
+  if(t===back){close();return}
   if(t.closest('.sp-x')){close();return}
-  var ib=t.closest('.sp-i');if(ib){var hh=back.querySelector('.sp-hint[data-h="'+ib.dataset.i+'"]');if(hh)hh.hidden=!hh.hidden;return}
+  var ib=t.closest('.sp-i');if(ib){var hh=back.querySelector('.sp-hint[data-h="'+ib.dataset.i+'"]');if(hh){hh.hidden=!hh.hidden;ib.setAttribute('aria-expanded',hh.hidden?'false':'true')}return}
   var sp=t.closest('.spd');if(sp){S.spd=sp.dataset.s;save();apply();return}
   var sw=t.closest('.sw');if(sw){var k=sw.dataset.k;if(k==='rb'){var ron=!E.classList.contains('ur');S.rb=ron?1:0;save();E.classList.toggle('ur',ron);apply();return}if(k==='bin'){var on=!E.classList.contains('bin');S.bin=on?1:0;save();if(window._bin)window._bin(on);apply();return}if(k==='rain'||k==='tree'||k==='mix'||k==='btn3'||k==='top2'){S[k]=S[k]?0:1;save()}else{setT(k,!E.classList.contains(k));S.wt=E.classList.contains('wt')?1:0;S.hw=E.classList.contains('hw')?1:0;save()}apply();return}
   var nd=t.closest('.ndot');if(nd){setBg(nd.dataset.b);S.bgc=nd.dataset.b;save();apply();return}
@@ -1433,6 +1443,16 @@ D.addEventListener('click',function(e){
     if(n>=20){n=0;open()}
   }
 },true);
+D.addEventListener('keydown',function(e){
+  if(!back.classList.contains('on'))return;
+  if(e.key==='Escape'){e.preventDefault();close();return}
+  if(e.key!=='Tab')return;
+  var f=[].slice.call(back.querySelectorAll('button,[href],input,select,textarea,[tabindex]:not([tabindex="-1"])')).filter(function(el){return el.offsetParent!==null});
+  if(!f.length)return;
+  var first=f[0],last=f[f.length-1],a=D.activeElement;
+  if(e.shiftKey){if(a===first||!back.contains(a)){e.preventDefault();last.focus()}}
+  else{if(a===last||!back.contains(a)){e.preventDefault();first.focus()}}
+});
 })();
 </script>
 <script>
